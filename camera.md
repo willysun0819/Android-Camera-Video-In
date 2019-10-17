@@ -1,5 +1,5 @@
 # The quick notes of android camera
-self pen notes regarding camera module porting on android 9
+self pen notes regarding camera module porting on android 9 rk3368, imx6, imx8 SoC platform.
 
 
 
