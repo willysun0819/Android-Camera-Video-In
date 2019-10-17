@@ -26,6 +26,7 @@ adb shell dumpsys media.camera
 // quick launch camera app
 am start -n com.android.camera2/com.android.camera.CameraActivity
 ```
+> ref: [media-ctl](./utils/media-ctl), [v4l2-ctl](./utils/v4l2-ctl) are the binary executable files built on android 9 platform.
 
 
 </br>
