@@ -7,6 +7,7 @@ self pen notes regarding camera module porting on android 9 rk3368, imx6, imx8 S
 ```
 // list /dev/video*
 grep -H '' /sys/class/video4linux/video*/name
+adb shell cat /sys/class/video4linux/*/name
 
 // show media framework topology graph of /dev/media*
 media-ctl -p /dev/media0
