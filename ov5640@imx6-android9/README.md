@@ -12,4 +12,5 @@ feature:
 
 note:
 
-camera sensor ov5640 is imx6 native supports CIS driver, however the supported features are relatively weak and not supported flash light.
+- camera sensor ov5640 is imx6 native supports CIS driver, however the supported features are relatively weak and not supported flash light.
+- Use V4L2 int-device and i.MX ISP video architecture.
