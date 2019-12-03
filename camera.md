@@ -118,3 +118,9 @@ LOCAL_CFLAGS +=: -DNDEBUG=0		// but seems not work?
 ```
 
 > ref:  [ANDROID中C++层打开ALOGV打印的LOG开关](https://blog.csdn.net/yu741677868yu/article/details/80682182)
+
+
+##### RGB, YUV
+- [RGB format](https://linuxtv.org/downloads/v4l-dvb-apis/uapi/v4l/pixfmt-rgb.html#pixfmt-rgb)
+- [YuV format](https://linuxtv.org/downloads/v4l-dvb-apis/uapi/v4l/yuv-formats.html#yuv-formats)
+
