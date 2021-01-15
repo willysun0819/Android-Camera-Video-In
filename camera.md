@@ -1,5 +1,5 @@
 # The quick notes of android camera
-self pen notes regarding camera module porting on android 9 rk3368, imx6, imx8 SoC platform.
+self pen notes regarding camera module porting on android 9 rk3368, imx6/imx8, msm8953 SoC platform.
 
 
 
@@ -25,7 +25,12 @@ v4l2-ctl -d /dev/video0 \
 adb shell dumpsys media.camera
 
 // quick launch camera app
+// aosp camera
 am start -n com.android.camera2/com.android.camera.CameraActivity
+
+// qualcomm camera, SnapdragonCamera.apk
+am start -n org.codeaurora.snapcam/com.android.camera.CameraLauncher
+
 ```
 > ref: [media-ctl](./utils/media-ctl), [v4l2-ctl](./utils/v4l2-ctl) are the binary executable files built on android 9 platform.
 
@@ -35,18 +40,18 @@ am start -n com.android.camera2/com.android.camera.CameraActivity
 ## Process
 
 ```
-    <Java> Camera App : com.android.camera2
+    <Java>      Camera App : com.android.camera2
 
-    <Java> media.camera
+    <Java>      media.camera
 
-    <native> cameraserver : cameraserver
+    <native>    cameraserver : cameraserver
 
-    <native> hidl_service : android.hardware.camera.provider@2.4-service
+    <native>    hidl_service : android.hardware.camera.provider@2.4-service
 
 
 user space
 
----------------------------------------------------------
+--------------------------------------------------------------------------------
 
 kernel space
 
@@ -66,18 +71,30 @@ kernel space
     - [CameraInfo.java](http://androidxref.com/9.0.0_r3/xref/frameworks/base/core/java/android/hardware/CameraInfo.java)
     - [CameraStatus.java](http://androidxref.com/9.0.0_r3/xref/frameworks/base/core/java/android/hardware/CameraStatus.java)
     - [camera2/](http://androidxref.com/9.0.0_r3/xref/frameworks/base/core/java/android/hardware/camera2/)
+
+- media.camera / media.camera.proxy :
+    - [CameraServiceProxy.java](http://androidxref.com/9.0.0_r3/xref/frameworks/base/services/core/java/com/android/server/camera/)
+
+
 - cameraserver :
     - client : [frameworks/av/camera](http://androidxref.com/9.0.0_r3/xref/frameworks/av/camera/)
     - server : [frameworks/av/services/camera](http://androidxref.com/9.0.0_r3/xref/frameworks/av/services/camera/)
+
+- cameraserver :
+    - client : [frameworks/av/camera](http://androidxref.com/9.0.0_r3/xref/frameworks/av/camera/)
+    - server : [frameworks/av/services/camera](http://androidxref.com/9.0.0_r3/xref/frameworks/av/services/camera/)
+
 - camera metedata : [system/media/camera](http://androidxref.com/9.0.0_r3/xref/system/media/camera/)
     - [camera_metadata.h](http://androidxref.com/9.0.0_r3/xref/system/media/camera/include/system/camera_metadata.h)
     - [camera_metadata_tags.h](http://androidxref.com/9.0.0_r3/xref/system/media/camera/include/system/camera_metadata_tags.h)
     - [camera_vendor_tags.h](http://androidxref.com/9.0.0_r3/xref/system/media/camera/include/system/camera_vendor_tags.h)
+
 - camera HIDL : [hardware/interfaces/camera](http://androidxref.com/9.0.0_r3/xref/hardware/interfaces/camera/)
     - [common](http://androidxref.com/9.0.0_r3/xref/hardware/interfaces/camera/common/)
     - [device](http://androidxref.com/9.0.0_r3/xref/hardware/interfaces/camera/device/)
     - [metadata](http://androidxref.com/9.0.0_r3/xref/hardware/interfaces/camera/metadata/)
     - [provider](http://androidxref.com/9.0.0_r3/xref/hardware/interfaces/camera/provider/)
+
 - legacy camera HAL:
     - definition: [hardware/libhardware/include/hardware]()
         - [camera.h](http://androidxref.com/9.0.0_r3/xref/hardware/libhardware/include/hardware/camera.h) : HAL 1
@@ -87,11 +104,15 @@ kernel space
     - implement: [hardware/libhardware/modules/camera/]( http://androidxref.com/9.0.0_r3/xref/hardware/libhardware/modules/camera/)
         - [3.0](http://androidxref.com/9.0.0_r3/xref/hardware/libhardware/modules/camera/3_0/)
         - [3.4](http://androidxref.com/9.0.0_r3/xref/hardware/libhardware/modules/camera/3_4/)
+
 - vendor camera HAL :
     - imx6/imx8 : vendor/nxp-opensource/imx/libcamera3
     - rk3368 :
-        - hardware\rockchip\camera :  rk camera HAL
-        - hardware\rockchip\camera_engine_rkisp :  rk 3A engine
+        - hardware/rockchip/camera :  rockchip camera HAL
+        - hardware/rockchip/camera_engine_rkisp :  rockchip 3A engine
+    - msm8953 :
+        - hardware/qcom/camera :  qualcomm camera HAL, called QCCamera2
+        - vendor/qcom/proprietary/mm-camera :  qualcomm camera engine, called mm-camera2
 
 - kernel : (take ov5640 for example)
   - imx6 : vendor/nxp-opensource/kernel_imx/drivers/media/platform/mxc/capture/ov5640_mipi_v2.c
@@ -99,6 +120,7 @@ kernel space
   - rk3368 :
     - kernel/drivers/media/platform/rockchip/isp1 :  rkisp1
     - kernel/drivers/media/i2c/ov5640.c
+  - msm8953 : kernel/msm-4.9/drivers/media/platform/msm/camera_v2
 
 
 
