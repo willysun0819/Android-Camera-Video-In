@@ -32,7 +32,7 @@ am start -n com.android.camera2/com.android.camera.CameraActivity
 am start -n org.codeaurora.snapcam/com.android.camera.CameraLauncher
 
 ```
-> ref: [media-ctl](./utils/media-ctl), [v4l2-ctl](./utils/v4l2-ctl) are the binary executable files built on android 9 platform.
+> ref: [media-ctl](./utils/linux%v4l2%tool%media-ctrl,%v4l2-ctl/media-ctl), [v4l2-ctl](./utils/v4l2-ctl) are the binary executable files built on android 9 platform.
 
 
 </br>
@@ -145,4 +145,12 @@ LOCAL_CFLAGS +=: -DNDEBUG=0		// but seems not work?
 ##### RGB, YUV
 - [RGB format](https://linuxtv.org/downloads/v4l-dvb-apis/uapi/v4l/pixfmt-rgb.html#pixfmt-rgb)
 - [YuV format](https://linuxtv.org/downloads/v4l-dvb-apis/uapi/v4l/yuv-formats.html#yuv-formats)
+
+
+##### YUV Viewer
+- Windows
+    - [IENT/YUView](https://github.com/IENT/YUView)
+    - [aqua0125/YUV Player](https://sourceforge.net/projects/raw-yuvplayer/)
+- Android
+    - [Jhuster/YUVDroidTools](https://github.com/Jhuster/YUVDroidTools.git)
 
