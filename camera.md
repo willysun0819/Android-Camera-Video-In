@@ -65,7 +65,7 @@ kernel space
 
 </br>
 
-## Source code
+## Source
 
 - [CameraX](https://developer.android.com/jetpack/androidx/releases/camera) @ [Jetpack](https://android.googlesource.com/platform/frameworks/support/)
     - [androidx.camera.camera2](https://developer.android.com/reference/androidx/camera/camera2/package-summary)
