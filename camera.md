@@ -119,7 +119,7 @@ kernel space
         - hardware/qcom/camera :  qualcomm camera HAL, called QCCamera2
         - vendor/qcom/proprietary/mm-camera :  qualcomm camera engine, called mm-camera2
 
-- kernel : (take ov5640 for example)
+- Kernel : (take ov5640 for example)
   - imx6 : vendor/nxp-opensource/kernel_imx/drivers/media/platform/mxc/capture/ov5640_mipi_v2.c
   - imx8 : vendor/nxp-opensource/kernel_imx/drivers/media/platform/imx8/ov5640_mipi_v3.c
   - rk3368 :
