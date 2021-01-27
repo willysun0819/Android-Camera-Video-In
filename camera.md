@@ -32,7 +32,7 @@ am start -n com.android.camera2/com.android.camera.CameraActivity
 am start -n org.codeaurora.snapcam/com.android.camera.CameraLauncher
 
 ```
-> ref: [media-ctl](./utils/linux%v4l2%tool%media-ctrl,%v4l2-ctl/media-ctl), [v4l2-ctl](./utils/v4l2-ctl) are the binary executable files built on android 9 platform.
+> ref: [media-ctl](https://github.com/tingkts/Android-Camera-Video-In/blob/master/utils/linux%20v4l2%20tool%20media-ctrl%2C%20v4l2-ctl/media-ctl), [v4l2-ctl](https://github.com/tingkts/Android-Camera-Video-In/blob/master/utils/linux%20v4l2%20tool%20media-ctrl%2C%20v4l2-ctl/v4l2-ctl) are the binary executable files built on android 9 platform.
 
 
 </br>
@@ -55,10 +55,11 @@ user space
 
 kernel space
 
-    camera sensor driver + V4l2 framework +  Media Controller framework
+    camera sensor driver + V4l2 framework + Media Controller framework
 ```
 
-> Ref: [Rockchip-isp1 - Rockchip open source Document](http://opensource.rock-chips.com/wiki_Rockchip-isp1)
+> Ref: [Rockchip-isp1 - Rockchip open source Document](http://opensource.rock-chips.com/wiki_Rockchip-isp1) </br>
+> Ref: [Qualcomm Camera Subsystem driver](https://www.kernel.org/doc/html/v4.18/media/v4l-drivers/qcom_camss.html)
 
 
 
@@ -66,7 +67,14 @@ kernel space
 
 ## Source code
 
-- camera API : [frameworks/base/core/java/android/hardware](http://androidxref.com/9.0.0_r3/xref/frameworks/base/core/java/android/hardware/)
+- [CameraX](https://developer.android.com/jetpack/androidx/releases/camera) @ [Jetpack](https://android.googlesource.com/platform/frameworks/support/)
+    - [androidx.camera.camera2](https://developer.android.com/reference/androidx/camera/camera2/package-summary)
+    - [androidx.camera.core](https://developer.android.com/reference/androidx/camera/core/package-summary)
+    - [androidx.camera.extensions](https://developer.android.com/reference/androidx/camera/extensions/package-summary)
+    - [androidx.camera.lifecycle](https://developer.android.com/reference/androidx/camera/lifecycle/package-summary)
+    - [androidx.camera.view](https://developer.android.com/reference/androidx/camera/view/package-summary)
+
+- Camera API1/API2 : [frameworks/base/core/java/android/hardware](http://androidxref.com/9.0.0_r3/xref/frameworks/base/core/java/android/hardware/)
     - [Camera.java](http://androidxref.com/9.0.0_r3/xref/frameworks/base/core/java/android/hardware/Camera.java)
     - [CameraInfo.java](http://androidxref.com/9.0.0_r3/xref/frameworks/base/core/java/android/hardware/CameraInfo.java)
     - [CameraStatus.java](http://androidxref.com/9.0.0_r3/xref/frameworks/base/core/java/android/hardware/CameraStatus.java)
@@ -80,32 +88,29 @@ kernel space
     - client : [frameworks/av/camera](http://androidxref.com/9.0.0_r3/xref/frameworks/av/camera/)
     - server : [frameworks/av/services/camera](http://androidxref.com/9.0.0_r3/xref/frameworks/av/services/camera/)
 
-- cameraserver :
-    - client : [frameworks/av/camera](http://androidxref.com/9.0.0_r3/xref/frameworks/av/camera/)
-    - server : [frameworks/av/services/camera](http://androidxref.com/9.0.0_r3/xref/frameworks/av/services/camera/)
 
-- camera metedata : [system/media/camera](http://androidxref.com/9.0.0_r3/xref/system/media/camera/)
+- Camera metedata : [system/media/camera](http://androidxref.com/9.0.0_r3/xref/system/media/camera/)
     - [camera_metadata.h](http://androidxref.com/9.0.0_r3/xref/system/media/camera/include/system/camera_metadata.h)
     - [camera_metadata_tags.h](http://androidxref.com/9.0.0_r3/xref/system/media/camera/include/system/camera_metadata_tags.h)
     - [camera_vendor_tags.h](http://androidxref.com/9.0.0_r3/xref/system/media/camera/include/system/camera_vendor_tags.h)
 
-- camera HIDL : [hardware/interfaces/camera](http://androidxref.com/9.0.0_r3/xref/hardware/interfaces/camera/)
+- Camera HIDL : [hardware/interfaces/camera](http://androidxref.com/9.0.0_r3/xref/hardware/interfaces/camera/)
     - [common](http://androidxref.com/9.0.0_r3/xref/hardware/interfaces/camera/common/)
     - [device](http://androidxref.com/9.0.0_r3/xref/hardware/interfaces/camera/device/)
     - [metadata](http://androidxref.com/9.0.0_r3/xref/hardware/interfaces/camera/metadata/)
     - [provider](http://androidxref.com/9.0.0_r3/xref/hardware/interfaces/camera/provider/)
 
-- legacy camera HAL:
+- Legacy Camera HAL:
     - definition: [hardware/libhardware/include/hardware]()
         - [camera.h](http://androidxref.com/9.0.0_r3/xref/hardware/libhardware/include/hardware/camera.h) : HAL 1
-        - [camera2.h](http://androidxref.com/9.0.0_r3/xref/hardware/libhardware/include/hardware/camera2.h) : HAL 2
+        - [camera2.h](http://androidxref.com/9.0.0_r3/xref/hardware/libhardware/include/hardware/camera2.h) : HAL 2 &ensp;&nbsp;- *deprecated*
         - [camera3.h](http://androidxref.com/9.0.0_r3/xref/hardware/libhardware/include/hardware/camera3.h) : HAL 3
         - [camera_common.h](http://androidxref.com/9.0.0_r3/xref/hardware/libhardware/include/hardware/camera_common.h)
-    - implement: [hardware/libhardware/modules/camera/]( http://androidxref.com/9.0.0_r3/xref/hardware/libhardware/modules/camera/)
+    - implementation: [hardware/libhardware/modules/camera/]( http://androidxref.com/9.0.0_r3/xref/hardware/libhardware/modules/camera/)
         - [3.0](http://androidxref.com/9.0.0_r3/xref/hardware/libhardware/modules/camera/3_0/)
         - [3.4](http://androidxref.com/9.0.0_r3/xref/hardware/libhardware/modules/camera/3_4/)
 
-- vendor camera HAL :
+- Vendor Camera HAL :
     - imx6/imx8 : vendor/nxp-opensource/imx/libcamera3
     - rk3368 :
         - hardware/rockchip/camera :  rockchip camera HAL
